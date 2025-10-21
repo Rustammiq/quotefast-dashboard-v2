@@ -13,12 +13,14 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui",
-    "test:watch": "vitest --watch",
-    "analyze": "ANALYZE=true npm run build",
-    "clean": "rm -rf .next out dist",
-    "preview": "npm run build && npm run start",
-    "check": "npm run type-check && npm run lint && npm run test:run"
+      "test:ui": "vitest --ui",
+      "test:watch": "vitest --watch",
+      "analyze": "ANALYZE=true npm run build",
+      "clean": "rm -rf .next out dist",
+      "preview": "npm run build && npm run start",
+      "check": "npm run type-check && npm run lint && npm run test:run",
+      "setup:supabase": "node scripts/setup-supabase.js",
+      "dev:reset": "npm run clean && npm run setup:supabase && npm run dev"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",

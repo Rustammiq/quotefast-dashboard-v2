@@ -35,7 +35,7 @@ async function fetchWithCache<T>(
       
       if (cachedData && now - cachedData.timestamp < CACHE_DURATION) {
         logger.debug(`Using cached data for ${cacheKey}`, 'api');
-        return { data: cachedData.data as T, error: null, status: 200 };
+        return { success: true, data: cachedData.data as T, error: undefined, status: 200 };
       }
     }
 
@@ -47,7 +47,7 @@ async function fetchWithCache<T>(
             const errorMessage = error instanceof Error ? error.message : 'Er is een fout opgetreden';
       const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
       return {
-        data: null,
+        success: false,
         error: errorMessage,
         status: errorStatus
       };
@@ -56,11 +56,11 @@ async function fetchWithCache<T>(
     // Cache resultaat
     apiCache.set(cacheKey, { data, timestamp: Date.now() });
     
-    return { data, error: null, status: 200 };
+    return { success: true, data: data || undefined, status: 200 };
   } catch (error: unknown) {
         const errorMessage = error instanceof Error ? error.message : 'Er is een onverwachte fout opgetreden';
     return { 
-      data: null, 
+      success: false,
       error: errorMessage, 
       status: 500 
     };
@@ -114,16 +114,16 @@ export const customersApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het aanmaken van de klant';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('customers:all');
       
-      return { data, error: null, status: 201 };
+      return { success: true, data, status: 201 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het aanmaken van de klant', 
         status: 500 
       };
@@ -143,17 +143,17 @@ export const customersApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het bijwerken van de klant';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('customers:all');
       apiCache.delete(`customers:${id}`);
       
-      return { data, error: null, status: 200 };
+      return { success: true, data: data || undefined, status: 200 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het bijwerken van de klant', 
         status: 500 
       };
@@ -171,17 +171,17 @@ export const customersApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het verwijderen van de klant';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('customers:all');
       apiCache.delete(`customers:${id}`);
       
-      return { data: null, error: null, status: 200 };
+      return { success: false, error: undefined, status: 200 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het verwijderen van de klant', 
         status: 500 
       };
@@ -250,16 +250,16 @@ export const invoicesApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het aanmaken van de factuur';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('invoices:all');
       
-      return { data, error: null, status: 201 };
+      return { success: true, data, status: 201 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het aanmaken van de factuur', 
         status: 500 
       };
@@ -279,17 +279,17 @@ export const invoicesApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het bijwerken van de factuur';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('invoices:all');
       apiCache.delete(`invoices:${id}`);
       
-      return { data, error: null, status: 200 };
+      return { success: true, data: data || undefined, status: 200 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het bijwerken van de factuur', 
         status: 500 
       };
@@ -307,17 +307,17 @@ export const invoicesApi = {
       if (error) {
         const errorMessage = error instanceof Error ? error.message : 'Fout bij het verwijderen van de factuur';
         const errorStatus = (error as PostgrestError)?.code ? 400 : 500;
-        return { data: null, error: errorMessage, status: errorStatus };
+        return { success: false, error: errorMessage, status: errorStatus };
       }
       
       // Invalidate cache
       apiCache.delete('invoices:all');
       apiCache.delete(`invoices:${id}`);
       
-      return { data: null, error: null, status: 200 };
+      return { success: false, error: undefined, status: 200 };
     } catch (error: any) {
       return { 
-        data: null, 
+        success: false, 
         error: error.message || 'Fout bij het verwijderen van de factuur', 
         status: 500 
       };

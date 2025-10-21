@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 "use client";
 import DashboardCard from "./components/DashboardCard";
+import BrainActivityWidget from "@/components/dashboard/BrainActivityWidget";
 import { Zap, FileText, Users, Euro, TrendingUp, Target, BarChart3, Sparkles, AlertCircle, Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
@@ -351,6 +352,25 @@ export default function DashboardPage() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Brain Activity Widget */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="max-w-7xl mx-auto mb-12"
+        >
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <BrainActivityWidget 
+              title="AI Brain Activity"
+              showMetrics={true}
+            />
+            <BrainActivityWidget 
+              title="Neural Processing"
+              showMetrics={true}
+            />
+          </div>
+        </motion.div>
 
         {/* Call-to-Action Section */}
         <motion.div 

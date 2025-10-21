@@ -1,5 +1,0 @@
-# Python requirements for Hugging Face Spaces
-# These are needed for the app.py wrapper
-
-# Node.js is pre-installed on Hugging Face Spaces
-# The actual dependencies are in package.json

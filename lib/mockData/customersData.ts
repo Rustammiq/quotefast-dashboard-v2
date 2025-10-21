@@ -7,8 +7,8 @@ export const mockCustomers: Customer[] = [
     email: 'contact@abcbedrijf.nl',
     phone: '+31 20 123 4567',
     company: 'ABC Bedrijf B.V.',
-    created_at: '2024-01-10T10:00:00Z',
-    updated_at: '2024-01-20T15:30:00Z'
+    createdAt: '2024-01-10T10:00:00Z',
+    updatedAt: '2024-01-20T15:30:00Z'
   },
   {
     id: 'customer-2',
@@ -16,8 +16,8 @@ export const mockCustomers: Customer[] = [
     email: 'maria@jansen.nl',
     phone: '+31 30 987 6543',
     company: 'Jansen Design',
-    created_at: '2024-01-05T14:30:00Z',
-    updated_at: '2024-01-15T09:15:00Z'
+    createdAt: '2024-01-05T14:30:00Z',
+    updatedAt: '2024-01-15T09:15:00Z'
   },
   {
     id: 'customer-3',
@@ -25,8 +25,8 @@ export const mockCustomers: Customer[] = [
     email: 'info@techstart.nl',
     phone: '+31 40 555 0123',
     company: 'TechStart Solutions',
-    created_at: '2024-01-15T11:20:00Z',
-    updated_at: '2024-01-25T16:45:00Z'
+    createdAt: '2024-01-15T11:20:00Z',
+    updatedAt: '2024-01-25T16:45:00Z'
   },
   {
     id: 'customer-4',
@@ -34,8 +34,8 @@ export const mockCustomers: Customer[] = [
     email: 'dev@retailplus.nl',
     phone: '+31 10 777 8901',
     company: 'RetailPlus Group',
-    created_at: '2024-01-20T08:00:00Z',
-    updated_at: '2024-01-28T13:20:00Z'
+    createdAt: '2024-01-20T08:00:00Z',
+    updatedAt: '2024-01-28T13:20:00Z'
   },
   {
     id: 'customer-5',
@@ -43,8 +43,8 @@ export const mockCustomers: Customer[] = [
     email: 'analytics@datacorp.nl',
     phone: '+31 50 222 3344',
     company: 'DataCorp Analytics',
-    created_at: '2024-01-08T12:30:00Z',
-    updated_at: '2024-01-18T10:45:00Z'
+    createdAt: '2024-01-08T12:30:00Z',
+    updatedAt: '2024-01-18T10:45:00Z'
   },
   {
     id: 'customer-6',
@@ -52,8 +52,8 @@ export const mockCustomers: Customer[] = [
     email: 'hello@startupxyz.nl',
     phone: '+31 70 111 2233',
     company: 'StartupXYZ',
-    created_at: '2024-01-03T09:15:00Z',
-    updated_at: '2024-01-13T14:30:00Z'
+    createdAt: '2024-01-03T09:15:00Z',
+    updatedAt: '2024-01-13T14:30:00Z'
   },
   {
     id: 'customer-7',
@@ -61,8 +61,8 @@ export const mockCustomers: Customer[] = [
     email: 'marketing@globaltech.nl',
     phone: '+31 35 444 5566',
     company: 'GlobalTech Industries',
-    created_at: '2024-01-25T15:45:00Z',
-    updated_at: '2024-01-30T11:00:00Z'
+    createdAt: '2024-01-25T15:45:00Z',
+    updatedAt: '2024-01-30T11:00:00Z'
   },
   {
     id: 'customer-8',
@@ -70,8 +70,8 @@ export const mockCustomers: Customer[] = [
     email: 'tech@innovatesolutions.nl',
     phone: '+31 15 666 7788',
     company: 'Innovate Solutions B.V.',
-    created_at: '2024-01-12T10:30:00Z',
-    updated_at: '2024-01-22T16:15:00Z'
+    createdAt: '2024-01-12T10:30:00Z',
+    updatedAt: '2024-01-22T16:15:00Z'
   }
 ];
 
