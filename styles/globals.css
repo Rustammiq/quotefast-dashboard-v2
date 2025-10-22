@@ -728,10 +728,12 @@ html, body {
 
     .glass-card {
       -webkit-backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px);
     }
 
     .modern-glass-button {
       -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
     }
 
     /* iOS zoom fix for inputs */
@@ -896,8 +898,13 @@ html, body {
 /* Custom mobile scrollbar */
 @layer components {
   .scrollbar-mobile {
+    /* Fallback for browsers that don't support scrollbar-width */
     scrollbar-width: thin;
     scrollbar-color: var(--muted-foreground) transparent;
+    
+    /* Fallback for older browsers */
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .scrollbar-mobile::-webkit-scrollbar {
@@ -932,6 +939,8 @@ html, body {
   .no-zoom {
     touch-action: manipulation;
     -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
   }
 }
 
@@ -993,6 +1002,7 @@ html, body {
 /* Glass card effects for neural network dashboard */
 .glass-card {
   background: rgba(15, 23, 42, 0.8);
+  -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   border: 1px solid rgba(148, 163, 184, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
