@@ -2,6 +2,8 @@
 /* eslint-disable no-console */
 /* Simplified email service voor QuoteFast */
 
+import React from 'react';
+
 // Removed problematic logger import that was causing recursive import
 
 // Base email template component
