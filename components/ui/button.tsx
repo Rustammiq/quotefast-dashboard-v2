@@ -1,47 +1,80 @@
-import * as React from "react";
-import { cn } from "./cn";
+'use client'
+
+import * as React from 'react'
+import { Slot } from '@radix-ui/react-slot'
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import { cva, type VariantProps } from 'class-variance-authority'
+import { cn } from '@/lib/utils'
+
+const buttonVariants = cva(
+  'inline-flex items-center justify-center gap-2 rounded-xl font-semibold transition-all',
+  { // Note: some variants like 'glass' and 'premium' rely on global CSS.
+    variants: {
+      variant: {
+        default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        glass: 'modern-glass-button',
+        premium: 'glass-card-premium',
+        underline: 'modern-glass-button relative group !p-0 !bg-transparent !border-none !shadow-none hover:text-white transition-all text-sm',
+      },
+      size: {
+        default: 'px-6 py-3 text-base',
+        sm: 'px-4 py-2 text-sm',
+        lg: 'px-8 py-4 text-lg',
+        icon: 'h-10 w-10',
+      },
+    },
+    defaultVariants: {
+      variant: 'default',
+      size: 'default',
+    },
+  }
+)
 
 export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link';
-  size?: 'default' | 'sm' | 'lg' | 'icon';
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  href?: string;
+  asChild?: boolean;
+  isLoading?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant = 'default', size = 'default', ...props }, ref) => {
-    const baseClasses = "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50";
-    
-    const variants = {
-      default: "bg-primary text-primary-foreground hover:bg-primary/90",
-      destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
-      outline: "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
-      secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-      ghost: "hover:bg-accent hover:text-accent-foreground",
-      link: "text-primary underline-offset-4 hover:underline",
-    };
+  ({ className, variant, size, href, asChild = false, isLoading = false, ...props }, ref) => {
+    const isLink = !!href;
+    const Comp = asChild ? Slot : (isLink ? Link : 'button');
+    const MotionComponent = motion.create(Comp as React.ElementType);
 
-    const sizes = {
-      default: "h-10 px-4 py-2",
-      sm: "h-9 rounded-md px-3",
-      lg: "h-11 rounded-md px-8",
-      icon: "h-10 w-10",
-    };
+    const motionProps: any = {
+      whileHover: { scale: isLoading ? 1 : 1.05 },
+      whileTap: { scale: isLoading ? 1 : 0.95 },
+      transition: { type: 'spring', stiffness: 400, damping: 17 },
+      ...(isLink ? { href } : {}),
+    }
 
     return (
-      <button
-        className={cn(
-          baseClasses,
-          variants[variant],
-          sizes[size],
-          className
-        )}
+      <MotionComponent
+        className={cn(buttonVariants({ variant, size, className }), {
+          'opacity-75 cursor-not-allowed': isLoading,
+        })}
         ref={ref}
+        disabled={isLoading || props.disabled}
+        {...motionProps}
         {...props}
-      />
-    );
+      >
+        {asChild ? (
+          props.children
+        ) : (
+          <>
+            {isLoading && <motion.div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />}
+            {props.children}
+          </>
+        )}
+        {variant === 'underline' && <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-primary to-blue-600 transition-all group-hover:w-full"></span>}
+      </MotionComponent>
+    )
   }
-);
+)
+Button.displayName = 'Button'
 
-Button.displayName = "Button";
-
-export { Button };
+export { Button, buttonVariants }
