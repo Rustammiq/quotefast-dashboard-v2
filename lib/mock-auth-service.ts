@@ -8,7 +8,14 @@ export interface AuthResponse {
 }
 
 export const mockAuthService = {
-  users: new Map<string, User>(),
+  users: new Map<string, User>([
+    ['test@quotefast.nl', {
+      id: 'demo_user_1',
+      email: 'test@quotefast.nl',
+      name: 'Demo Gebruiker',
+      company: 'QuoteFast Demo'
+    }]
+  ]),
   currentUser: null as User | null,
 
   register: async (email: string, password: string, name: string, company?: string): Promise<AuthResponse> => {

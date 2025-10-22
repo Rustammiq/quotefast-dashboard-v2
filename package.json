@@ -13,14 +13,25 @@
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
-      "test:ui": "vitest --ui",
-      "test:watch": "vitest --watch",
-      "analyze": "ANALYZE=true npm run build",
-      "clean": "rm -rf .next out dist",
-      "preview": "npm run build && npm run start",
-      "check": "npm run type-check && npm run lint && npm run test:run",
-      "setup:supabase": "node scripts/setup-supabase.js",
-      "dev:reset": "npm run clean && npm run setup:supabase && npm run dev"
+    "test:ui": "vitest --ui",
+    "test:watch": "vitest --watch",
+    "analyze": "ANALYZE=true npm run build",
+    "clean": "rm -rf .next out dist",
+    "preview": "npm run build && npm run start",
+    "check": "npm run type-check && npm run lint && npm run test:run",
+    "test:unit": "vitest run --reporter=verbose",
+    "test:integration": "vitest run --reporter=verbose tests/integration",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "test:e2e:debug": "playwright test --debug",
+    "test:all": "npm run test:unit && npm run test:integration",
+    "test:ci": "npm run test:run -- --reporter=json --outputFile=test-results.json",
+    "test:lighthouse": "node scripts/lighthouse-test.js",
+    "test:accessibility": "playwright test --grep @accessibility",
+    "test:performance": "playwright test --grep @performance",
+    "test:visual": "playwright test --grep @visual",
+    "setup:supabase": "node scripts/setup-supabase.js",
+    "dev:reset": "npm run clean && npm run setup:supabase && npm run dev"
   },
   "dependencies": {
     "@google/generative-ai": "^0.24.1",
@@ -69,6 +80,7 @@
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^14.2.5",
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/forms": "^0.5.10",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
@@ -81,6 +93,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "14.2.5",
     "jsdom": "^27.0.0",
+    "playwright": "^1.56.1",
     "vitest": "^3.2.4"
   }
 }

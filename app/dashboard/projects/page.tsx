@@ -226,8 +226,8 @@ export default function ProjectsPage() {
                   theme === "dark" ? "bg-white/10" : "bg-gray-200"
                 }`}>
                   <div 
-                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${project.progress}%` }}
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full progress-bar-data"
+                    data-progress={project.progress}
                   ></div>
                 </div>
               </div>

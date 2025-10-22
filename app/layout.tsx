@@ -3,7 +3,11 @@ import { Inter } from 'next/font/google'
 import '../styles/globals.css'
 import { AppProviders } from './providers'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true
+})
 
 export const metadata: Metadata = {
   title: 'QuoteFast Dashboard - AI Offertegenerator | Automatiseer je Offerteproces',

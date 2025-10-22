@@ -115,12 +115,13 @@ Thumbs.db
 .cursor/rules/codacy.mdc
 kilo-code-mcp-config*.json
 
-# Images (temporary)
+# Images (temporary) - only ignore temp images, not icons
 *.png
 *.jpg
 *.jpeg
 *.gif
-*.svg
+# Keep SVG icons in public folder
+!public/*.svg
 
 # Scripts config
 scripts/config/
@@ -135,6 +136,58 @@ templates/
 AGENTS.md
 spec-driven.md
 
+
+# Test files and temporary documentation
+__tests__/
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+jest.config.js
+jest.setup.js
+vitest.config.ts
+test-results.html
+test-results.json
+TESTING_STATUS_UPDATE.md
+
+# Temporary documentation and guides
+*_GUIDE.md
+*_FIXES.md
+*_ANALYSIS.md
+*_SUMMARY.md
+*_INSTRUCTIONS.md
+CHANGELOG.md
+PULL_REQUEST_TEMPLATE.md
+README.md
+
+# Demo and temporary scripts
+demo.sh
+*_demo.js
+*_test.js
+*_auth.js
+*_functions.js
+*_migration.js
+*_database.js
+*_console.js
+*_trigger.js
+*_keys.js
+apply-*.sql
+cleanup-*.sql
+run-*.js
+check-*.js
+fix-*.js
+get-*.js
+
+# Lighthouse and performance testing
+lighthouserc.js
+lighthouse-test.js
+
+# Temporary components and unused files
+components/dashboard/BrainActivityWidget.tsx
+components/dashboard/NeuralNetworkDashboard.tsx
+components/ui/DashboardBrainAnimation.tsx
+components/ui/InteractiveBrainNeuralNetwork.tsx
+app/dashboard/neural-network/
 
 # Spec Kit
 .specify/

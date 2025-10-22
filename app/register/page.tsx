@@ -111,7 +111,7 @@ export default function RegisterPage() {
                   <GradientText>Account Aanmaken</GradientText>
                 </h1>
               </div>
-              <p className="text-gray-300 text-lg mb-6">Start je gratis proefperiode van 14 dagen</p>
+              <p className="text-gray-300 text-lg mb-6">Start je gratis proefperiode van 7 dagen</p>
               
               {/* Benefits List */}
               <div className="space-y-2 text-sm">

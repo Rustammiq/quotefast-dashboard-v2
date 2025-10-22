@@ -597,7 +597,7 @@ function FormField({
         type={type}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        aria-invalid={!!error ? "true" : "false"}
+        {...(error && { 'aria-invalid': 'true' })}
         placeholder={placeholder}
         disabled={disabled}
         required={required}

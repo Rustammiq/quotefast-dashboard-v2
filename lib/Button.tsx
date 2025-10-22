@@ -43,7 +43,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant, size, href, asChild = false, isLoading = false, ...props }, ref) => {
     const isLink = !!href;
     const Comp = asChild ? Slot : (isLink ? Link : 'button');
-    const MotionComponent = motion(Comp as React.ElementType);
+    const MotionComponent = motion.create(Comp as React.ElementType);
 
     const motionProps: any = {
       whileHover: { scale: isLoading ? 1 : 1.05 },

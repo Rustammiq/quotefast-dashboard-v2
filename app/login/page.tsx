@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useAuth } from '@/app/providers'
 import { useRouter } from 'next/navigation'
 import ErrorMessage from '../../components/ui/ErrorMessage'
-import BrainNeuronAnimation from '../../components/ui/BrainNeuronAnimation'
 import { motion } from 'framer-motion'
 import GradientText from '../../components/ui/GradientText'
 
@@ -57,7 +56,6 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/50 to-slate-900 flex items-center justify-center px-6 relative overflow-hidden">
       {/* Enhanced Background Effects */}
-      <BrainNeuronAnimation />
       <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent pointer-events-none" />
       
       {/* Floating Elements */}

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../../components
 import { Bell, Save } from "lucide-react";
 import { useSettingsForm } from "../hooks/useSettingsForm";
 import { NOTIFICATION_PREFERENCES } from "../utils/constants";
-import { NotificationSettings } from "../../../../types/settings";
+import { NotificationSettings } from "@/types/settings";
 
 export default function NotificationsSection() {
   const {
@@ -23,7 +23,7 @@ export default function NotificationsSection() {
   }, [notificationSettings]);
 
   const handleToggle = (key: keyof NotificationSettings) => {
-    setLocalSettings(prev => {
+    setLocalSettings((prev: NotificationSettings) => {
       const newSettings = { ...prev, [key]: !prev[key] };
       setHasChanges(JSON.stringify(newSettings) !== JSON.stringify(notificationSettings));
       return newSettings;

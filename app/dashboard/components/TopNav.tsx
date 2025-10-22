@@ -18,6 +18,7 @@ export default function TopNav() {
   const { theme, toggleTheme } = useTheme()
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  
 
   // Navigation click handler
   const handleNavClick = (label: string) => {
@@ -155,55 +156,62 @@ export default function TopNav() {
 
               {/* User Menu */}
               <div className="relative">
-          <button
+                <button
+                  id="user-menu-button"
                   className="flex items-center gap-2 p-2 text-white/70 hover:text-white rounded-lg transition-colors"
                   onClick={toggleUserMenu}
                   aria-label="Gebruikersmenu"
+                  aria-expanded={isUserMenuOpen ? "true" : "false"}
+                  aria-haspopup="menu"
                 >
                   <User className="h-5 w-5" />
                   <ChevronDown className={`h-4 w-4 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                   <span className="sr-only">Gebruikersmenu</span>
-          </button>
+                </button>
 
                 {/* User Menu Dropdown */}
-                <div 
-                  className={`
-                    absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg py-1
-                    ${isUserMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
-                    transition-all duration-200
-                  `}
-                  role="menu"
-                  aria-orientation="vertical"
-                >
-                  <Link 
-                    href="/dashboard/profile" 
-                    className="block px-4 py-2 text-sm text-white hover:bg-white/10 rounded"
-                    onClick={() => {
-                      setIsUserMenuOpen(false)
-                      handleNavClick('profile')
-                    }}
+                {isUserMenuOpen && (
+                  <div 
+                    className="absolute right-0 mt-2 w-48 bg-black/90 backdrop-blur-sm border border-white/10 rounded-lg shadow-lg py-1"
+                    role="menu"
+                    aria-orientation="vertical"
+                    aria-labelledby="user-menu-button"
                   >
-                    Mijn Profiel
-                  </Link>
-          <Link
-            href="/dashboard/settings"
-                    className="block px-4 py-2 text-sm text-white hover:bg-white/10 rounded"
-                    onClick={() => {
-                      setIsUserMenuOpen(false)
-                      handleNavClick('settings')
-                    }}
-                  >
-                    Instellingen
-          </Link>
-                  <div className="border-t border-white/10">
-                    <button 
-                      className="block w-full text-left px-4 py-2 text-sm text-destructive hover:bg-destructive/10 rounded"
-                      onClick={handleSignOut}
+                    <Link 
+                      href="/dashboard/profile" 
+                      className="block px-4 py-2 text-sm text-white hover:bg-white/10 rounded"
+                      role="menuitem"
+                      tabIndex={-1}
+                      onClick={() => {
+                        setIsUserMenuOpen(false)
+                        handleNavClick('profile')
+                      }}
                     >
-                      Uitloggen
-                    </button>
+                      Mijn Profiel
+                    </Link>
+                    <Link
+                      href="/dashboard/settings"
+                      className="block px-4 py-2 text-sm text-white hover:bg-white/10 rounded"
+                      role="menuitem"
+                      tabIndex={-1}
+                      onClick={() => {
+                        setIsUserMenuOpen(false)
+                        handleNavClick('settings')
+                      }}
+                    >
+                      Instellingen
+                    </Link>
+                    <div className="border-t border-white/10">
+                      <button 
+                        className="block w-full text-left px-4 py-2 text-sm text-destructive hover:bg-destructive/10 rounded"
+                        role="menuitem"
+                        onClick={handleSignOut}
+                      >
+                        Uitloggen
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
               </div>
             </div>
           </div>

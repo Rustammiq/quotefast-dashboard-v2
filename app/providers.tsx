@@ -42,8 +42,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const initializeAuth = async () => {
       try {
         setLoading(true)
-        const { authService } = await import('@/lib/auth-service')
-        const response = await authService.getCurrentUser()
+        // Use mock auth service for development
+        const { mockAuthService } = await import('@/lib/mock-auth-service')
+        const response = await mockAuthService.getCurrentUser()
 
         if (response.user) {
           setUser({
@@ -69,10 +70,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const createTestUser = async () => {
     try {
       logger.info('🔧 Setting up test user for development...')
-      const { authService } = await import('@/lib/auth-service')
+      const { mockAuthService } = await import('@/lib/mock-auth-service')
 
       // Try to login with test credentials first
-      const testResponse = await authService.login('test@quotefast.nl', 'testpassword123')
+      const testResponse = await mockAuthService.login('test@quotefast.nl', 'testpassword123')
 
       if (testResponse.user) {
         setUser({
@@ -93,8 +94,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signIn = async (email: string, password: string) => {
     try {
       setLoading(true)
-      const { authService } = await import('@/lib/auth-service')
-      const response = await authService.login(email, password)
+      const { mockAuthService } = await import('@/lib/mock-auth-service')
+      const response = await mockAuthService.login(email, password)
 
       if (response.user) {
         setUser({
@@ -116,8 +117,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signOut = async () => {
     try {
       setLoading(true)
-      const { authService } = await import('@/lib/auth-service')
-      await authService.logout()
+      const { mockAuthService } = await import('@/lib/mock-auth-service')
+      await mockAuthService.logout()
       setUser(null)
     } catch (error: any) {
       logger.error('Sign out error:', error)
@@ -130,8 +131,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const signUp = async (email: string, password: string, name: string) => {
     try {
       setLoading(true)
-      const { authService } = await import('@/lib/auth-service')
-      const response = await authService.register(email, password, name)
+      const { mockAuthService } = await import('@/lib/mock-auth-service')
+      const response = await mockAuthService.register(email, password, name)
 
       if (response.user && response.status === 200) {
         setUser({
@@ -158,8 +159,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       if (!user) throw new Error('Geen gebruiker ingelogd')
 
       setLoading(true)
-      const { authService } = await import('@/lib/auth-service')
-      const response = await authService.updateUser(user.id, { name: updates.full_name })
+      const { mockAuthService } = await import('@/lib/mock-auth-service')
+      const response = await mockAuthService.updateUser(user.id, { name: updates.full_name })
 
       if (response.user) {
         setUser({
