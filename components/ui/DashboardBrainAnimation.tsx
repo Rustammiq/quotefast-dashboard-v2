@@ -281,7 +281,7 @@ export default function DashboardBrainAnimation({
     }
 
     animationRef.current = requestAnimationFrame(animate)
-  }, [simulateActivity, intensitySettings])
+  }, [simulateActivity, intensitySettings, drawNeuron])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -310,7 +310,7 @@ export default function DashboardBrainAnimation({
         cancelAnimationFrame(animationRef.current)
       }
     }
-  }, [animate, config])
+  }, [animate, config, initializeNeurons])
 
   // Set canvas size via useEffect
   useEffect(() => {

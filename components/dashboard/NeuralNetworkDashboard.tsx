@@ -139,7 +139,7 @@ export default function NeuralNetworkDashboard() {
   }, [simulateAIProcessing, simulateHumanInput])
 
   const handleNeuronClick = (neuron: any) => {
-    console.log('Neuron clicked:', neuron)
+    // Neuron clicked - could add detailed interaction here
     // You can add more detailed neuron interaction here
   }
 

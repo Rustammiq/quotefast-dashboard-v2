@@ -1,203 +1,116 @@
-# QuoteFast AI Dashboard
+# 🚀 QuoteFast Dashboard v2
 
-Een moderne SaaS platform voor offerte en factuur beheer met krachtige AI-integratie. Ontworpen voor het MKB om offertes sneller te maken met behulp van artificial intelligence.
+Een moderne, geoptimaliseerde SaaS platform voor offerte en factuur beheer met krachtige AI-integratie.
 
 ## ✨ Features
 
-- 🔐 **Supabase Authenticatie** - Veilige gebruikersbeheer met moderne auth flows
-- 📊 **Intelligente Dashboard** - Real-time analytics en KPI monitoring
-- 💰 **Offerte & Factuur Beheer** - Complete workflow van offerte tot betaling
-- 🤖 **AI-Powered Tools** - Gemini AI integratie voor slimme content generatie
-- ⚡ **Performance Monitoring** - Geavanceerde performance optimalisatie tools
-- 📱 **Responsive Design** - Perfect op desktop, tablet en mobile
-- 🌙 **Dark/Light Mode** - Automatische thema detectie
-- 🚀 **Real-time Updates** - Live data synchronisatie
-- 🔍 **SEO Geoptimaliseerd** - Voor betere zoekmachine vindbaarheid
+- 🧠 **AI-Powered**: Google Gemini AI voor intelligente content generatie
+- 📊 **Neural Network Dashboard**: Interactieve hersenactiviteit visualisatie
+- 💼 **Quote Management**: Volledig offerte beheer systeem
+- 🧾 **Invoice System**: Geavanceerd facturatie systeem
+- 🎨 **Modern UI**: Responsive design met Framer Motion animaties
+- 🔐 **Secure Auth**: Supabase authenticatie en autorisatie
+- ⚡ **Performance**: Geoptimaliseerd voor snelheid en efficiency
 
 ## 🛠 Tech Stack
 
 - **Frontend**: Next.js 14, React 18, TypeScript
 - **Backend**: Supabase (PostgreSQL, Auth, Real-time, Storage)
 - **AI Integration**: Google Gemini AI 2.5 Pro
-- **Styling**: Tailwind CSS, CSS Modules
-- **Testing**: Jest, Vitest, React Testing Library
-- **Deployment**: Hugging Face Spaces, Netlify Ready
-- **Performance**: Lighthouse 90+ Score
+- **Styling**: Tailwind CSS, CSS Modules, Framer Motion
+- **Deployment**: Ready for Vercel, Netlify, Hugging Face Spaces
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- Node.js 18+
-- npm of yarn
-- Supabase account
-- GitHub account
-
-### Installation
-
-1. **Clone het project**
 ```bash
-git clone https://github.com/roustammm/quotefast-dashboard.git
-cd quotefast-dashboard
-```
+# Clone repository
+git clone https://github.com/Rustammiq/quotefast-dashboard-v2.git
+cd quotefast-dashboard-v2
 
-2. **Installeer dependencies**
-```bash
+# Install dependencies
 npm install
-```
 
-3. **Configureer environment variables**
-```bash
-cp env.example .env.local
-# Vul je Supabase credentials in
-```
+# Setup environment
+cp .env.example .env.local
+# Add your Supabase and API keys to .env.local
 
-4. **Start development server**
-```bash
+# Run development server
 npm run dev
 ```
 
-5. **Open browser**
+## 📁 Project Structure
+
 ```
-http://localhost:3000
+app/                    # Next.js 13+ app directory
+├── api/               # API routes
+├── auth/              # Authentication pages
+├── dashboard/         # Dashboard pages en componenten
+└── components/        # Herbruikbare componenten
+
+components/            # Shared componenten
+├── ui/               # Basis UI componenten
+└── dashboard/        # Dashboard specifieke componenten
+
+lib/                  # Utilities en services
+├── supabase/         # Supabase client en utilities
+├── gemini-service.ts # AI integration
+└── api-service.ts    # API calls
+
+types/                # TypeScript type definities
 ```
 
-## ⚙️ Environment Variables
+## 🧹 Recent Cleanup (v2)
+
+- ✅ **47+ bestanden verwijderd** (duplicaten, scripts, docs)
+- ✅ **Componenten geconsolideerd** (Button, Logger, NavLink)
+- ✅ **TypeScript geoptimaliseerd** (ES2015 + downlevelIteration)
+- ✅ **Mock data gesynchroniseerd** met type definities
+- ✅ **Neural Network Dashboard** toegevoegd
+- 📊 **~365KB ruimtebesparing**, schonere codebase
+
+## 🔧 Development
 
 ```bash
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_role_key
+# Type checking
+npm run type-check
 
-# Application
-NEXT_PUBLIC_APP_URL=http://localhost:3000
+# Linting
+npm run lint
 
-# AI Integration (Optioneel)
-GEMINI_API_KEY=your_gemini_api_key
+# Build
+npm run build
 
-# Analytics (Optioneel)
-NEXT_PUBLIC_GA_ID=your_google_analytics_id
+# Start production
+npm start
 ```
-
-## 🛠 Development Scripts
-
-```bash
-# Development
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run start        # Start production server
-
-# Testing
-npm run test         # Run tests
-npm run test:watch   # Watch mode
-npm run test:coverage # Coverage report
-
-# Linting & Formatting
-npm run lint         # ESLint check
-npm run lint:fix     # Auto-fix linting issues
-npm run format       # Prettier formatting
-
-# Performance
-npm run lighthouse   # Performance audit
-npm run analyze      # Bundle analyzer
-```
-
-## 🤖 AI Features
-
-### Gemini Integration
-Het platform gebruikt Google Gemini AI voor:
-- **Slimme Offerte Templates** - Automatische content generatie
-- **Code Assistentie** - AI-powered development hulp
-- **Performance Optimalisatie** - Automated performance suggestions
-
-### AI-Powered Components
-- `GeminiCodingAssistant` - Real-time code suggestions
-- `PerformanceMonitor` - Automated performance tracking
-- `SEOHead` - Dynamic meta tag optimization
 
 ## 📊 Performance
 
-- **Lighthouse Score**: 90+ op alle metrics
-- **Core Web Vitals**: Excellent ratings
+- **LCP**: < 2.5s (Large screens)
+- **FID**: < 100ms  
+- **CLS**: < 0.1
 - **Bundle Size**: Geoptimaliseerd voor snelle loading
-- **CDN Ready**: Statische assets optimalisatie
-
-## 🔒 Security
-
-- **Supabase RLS** - Row Level Security enabled
-- **Environment Variables** - Secure credential management
-- **Input Validation** - Comprehensive form validation
-- **CSRF Protection** - Cross-site request forgery prevention
-
-## 🚀 Deployment
-
-### Hugging Face Spaces (Recommended)
-```bash
-# 1. Push naar GitHub
-git push origin main
-
-# 2. Deploy op Hugging Face Spaces
-# De applicatie wordt automatisch gedeployed via GitHub integration
-```
-
-### Netlify
-```bash
-# Build settings:
-# Build command: npm run build
-# Publish directory: .next
-```
-
-### Vercel
-```bash
-# Installeer Vercel CLI en deploy
-vercel --prod
-```
-
-## 📝 Development Workflow
-
-### Branch Strategy
-- `main` - Productie branch
-- `develop` - Development branch
-- `feature/*` - Nieuwe features
-- `fix/*` - Bug fixes
-
-### Commit Convention
-```
-feat: nieuwe feature toevoegen
-fix: bug fix
-docs: documentatie updates
-style: styling wijzigingen
-refactor: code refactoring
-test: test toevoegingen
-chore: maintenance taken
-```
 
 ## 🤝 Contributing
 
 1. Fork het project
-2. Maak een feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit je wijzigingen (`git commit -m 'feat: amazing feature'`)
-4. Push naar de branch (`git push origin feature/amazing-feature`)
+2. Maak een feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit je changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push naar de branch (`git push origin feature/AmazingFeature`)
 5. Open een Pull Request
 
 ## 📄 License
 
-MIT License - zie [LICENSE](LICENSE) bestand voor details.
+Dit project is gelicenseerd onder de MIT License - zie het [LICENSE](LICENSE) bestand voor details.
 
 ## 🙏 Acknowledgments
 
-- [Supabase](https://supabase.com) - Backend as a Service
-- [Google Gemini AI](https://ai.google.dev) - AI Integration
-- [Next.js](https://nextjs.org) - React Framework
-- [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS
-
-## 📞 Support
-
-Voor support en vragen:
-- Open een [GitHub Issue](https://github.com/roustammm/quotefast-dashboard/issues)
-- Bekijk de [Documentation](./docs/) folder
-- Check de [Deployment Guide](./DEPLOYMENT.md)
+- [Next.js](https://nextjs.org/) voor het geweldige framework
+- [Supabase](https://supabase.com/) voor de backend services
+- [Tailwind CSS](https://tailwindcss.com/) voor de styling
+- [Framer Motion](https://www.framer.com/motion/) voor de animaties
+- [Google Gemini](https://ai.google.dev/) voor de AI integratie
 
 ---
 
-**Made with ❤️ for modern businesses**
+**QuoteFast Dashboard v2** - Gemaakt met ❤️ voor moderne bedrijven
