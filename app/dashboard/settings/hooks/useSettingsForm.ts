@@ -1,8 +1,8 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useAuth } from '@/app/providers';
 import { useToast } from './useToast';
-import { settingsService } from '../../../../lib/settings-service';
-import { NotificationSettings, AppearanceSettings, AIPersonalizationSettings } from '../../../../types/settings';
+import { settingsService } from '../../../../lib/validation';
+import { NotificationSettings, AppearanceSettings, AIPersonalizationSettings } from '../../../../types/forms/settings';
 
 export const useSettingsForm = () => {
   const { user } = useAuth();

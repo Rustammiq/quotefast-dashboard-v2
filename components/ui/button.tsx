@@ -13,6 +13,8 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: 'bg-primary text-primary-foreground hover:bg-primary/90',
+        secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+        outline: 'border border-input bg-background hover:bg-accent hover:text-accent-foreground',
         glass: 'modern-glass-button',
         premium: 'glass-card-premium',
         underline: 'modern-glass-button relative group !p-0 !bg-transparent !border-none !shadow-none hover:text-white transition-all text-sm',

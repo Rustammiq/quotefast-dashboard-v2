@@ -4,8 +4,8 @@
 'use client'
 
 import React, { ReactNode, createContext, useState, useEffect } from 'react'
-import { ThemeProvider as ThemeWrapper } from '@/contexts/ThemeContext'
-import { AIPersonalizationProvider } from '@/contexts/AIPersonalizationContext'
+import { ThemeProvider as ThemeWrapper  } from '../contexts/ThemeContext'
+import { AIPersonalizationProvider  } from '../contexts/AIPersonalizationContext'
 import { Toaster } from 'react-hot-toast'
 
 import { logger } from "@/lib/logger";
@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
           setUser({
             id: response.user.id,
             email: response.user.email,
-            full_name: response.user.name,
+            full_name: response.user.name || null,
             avatar_url: null
           })
         }
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser({
           id: testResponse.user.id,
           email: testResponse.user.email,
-          full_name: testResponse.user.name,
+          full_name: testResponse.user.name || null,
           avatar_url: null
         })
         logger.info('✅ Test user logged in successfully!')
@@ -101,7 +101,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser({
           id: response.user.id,
           email: response.user.email,
-          full_name: response.user.name,
+          full_name: response.user.name || null,
           avatar_url: null
         })
       } else {
@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser({
           id: response.user.id,
           email: response.user.email,
-          full_name: response.user.name,
+          full_name: response.user.name || null,
           avatar_url: null
         })
       } else if (response.status === 202) {
@@ -166,7 +166,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setUser({
           id: response.user.id,
           email: response.user.email,
-          full_name: response.user.name,
+          full_name: response.user.name || null,
           avatar_url: null
         })
       } else {

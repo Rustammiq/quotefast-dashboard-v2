@@ -6,19 +6,19 @@ export * from './analytics';
 export * from './validation';
 
 // Core Services
-export { default as apiService } from './api-service';
-export { default as logger } from './logger';
-export { default as onboarding } from './onboarding';
-export { default as stripe } from './stripe';
-export { default as supabase } from './supabase';
-export { default as supabaseAdmin } from './supabase-admin';
-export { default as utils } from './utils';
+export * from './api-service';
+export * from './logger';
+export * from './onboarding';
+export * from './stripe';
+export * from './supabase';
+export { supabaseAdmin as supabaseAdminService } from './supabase-admin';
+export * from './utils';
 
 // Supabase
 export * from './supabase';
 
 // Inngest
-export * from './inngest';
+// export * from './inngest';
 
 // Mock Data
-export * from './mockData';
+// export * from './mockData';

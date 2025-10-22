@@ -429,3 +429,4 @@ export default function InvoiceForm({ isOpen, onClose, invoice, onSave }: Invoic
     </Modal>
   )
 }
+

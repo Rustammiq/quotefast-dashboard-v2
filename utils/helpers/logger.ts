@@ -1,128 +1,82 @@
-/**
- * Logger utility for QuoteFast Dashboard
- * Provides structured logging with different levels
- */
+// Logger utility for API routes
 
-export enum LogLevel {
-  DEBUG = 0,
-  INFO = 1,
-  WARN = 2,
-  ERROR = 3,
-}
+type LogLevel = 'info' | 'warn' | 'error' | 'debug';
 
 interface LogEntry {
   level: LogLevel;
   message: string;
   timestamp: string;
-  context?: Record<string, any>;
-  error?: Error;
+  context?: string;
+  data?: any;
 }
 
 class Logger {
-  private level: LogLevel;
-  private context: Record<string, any>;
+  private isDevelopment = process.env.NODE_ENV === 'development';
 
-  constructor(level: LogLevel = LogLevel.INFO, context: Record<string, any> = {}) {
-    this.level = level;
-    this.context = context;
-  }
-
-  private shouldLog(level: LogLevel): boolean {
-    return level >= this.level;
-  }
-
-  private formatMessage(entry: LogEntry): string {
-    const { level, message, timestamp, context, error } = entry;
-    const levelName = LogLevel[level];
-    
-    let formatted = `[${timestamp}] ${levelName}: ${message}`;
-    
-    if (context && Object.keys(context).length > 0) {
-      formatted += ` | Context: ${JSON.stringify(context)}`;
-    }
-    
-    if (error) {
-      formatted += ` | Error: ${error.message}`;
-      if (error.stack) {
-        formatted += `\nStack: ${error.stack}`;
-      }
-    }
-    
-    return formatted;
-  }
-
-  private log(level: LogLevel, message: string, context?: Record<string, any>, error?: Error): void {
-    if (!this.shouldLog(level)) return;
-
-    const entry: LogEntry = {
+  private formatMessage(level: LogLevel, message: string, context?: string, data?: any): LogEntry {
+    return {
       level,
       message,
       timestamp: new Date().toISOString(),
-      context: { ...this.context, ...context },
-      error,
+      context,
+      data,
     };
+  }
 
-    const formattedMessage = this.formatMessage(entry);
+  private log(level: LogLevel, message: string, context?: string, data?: any): void {
+    const logEntry = this.formatMessage(level, message, context, data);
+    
+    // In development, use console for immediate feedback
+    if (this.isDevelopment) {
+      const prefix = `[${logEntry.timestamp}] ${level.toUpperCase()}`;
+      const contextStr = context ? ` [${context}]` : '';
+      
+      switch (level) {
+        case 'error':
+          console.error(`${prefix}${contextStr}: ${message}`, data || '');
+          break;
+        case 'warn':
+          console.warn(`${prefix}${contextStr}: ${message}`, data || '');
+          break;
+        case 'debug':
+          if (this.isDevelopment) {
+            console.debug(`${prefix}${contextStr}: ${message}`, data || '');
+          }
+          break;
+        default:
+          if (this.isDevelopment) {
+            console.log(`${prefix}${contextStr}: ${message}`, data || '');
+          }
+      }
+    }
+    
+    // In production, you could send logs to a service like Sentry, LogRocket, etc.
+    this.sendToLogService(logEntry);
+  }
 
-    switch (level) {
-      case LogLevel.DEBUG:
-        console.debug(formattedMessage);
-        break;
-      case LogLevel.INFO:
-        console.info(formattedMessage);
-        break;
-      case LogLevel.WARN:
-        console.warn(formattedMessage);
-        break;
-      case LogLevel.ERROR:
-        console.error(formattedMessage);
-        break;
+  private sendToLogService(logEntry: LogEntry): void {
+    // In production, implement actual logging service integration
+    if (!this.isDevelopment) {
+      // Example: Send to external logging service
+      // fetch('/api/logs', { method: 'POST', body: JSON.stringify(logEntry) });
     }
   }
 
-  debug(message: string, context?: Record<string, any>): void {
-    this.log(LogLevel.DEBUG, message, context);
+  info(message: string, context?: string, data?: any): void {
+    this.log('info', message, context, data);
   }
 
-  info(message: string, context?: Record<string, any>): void {
-    this.log(LogLevel.INFO, message, context);
+  warn(message: string, context?: string, data?: any): void {
+    this.log('warn', message, context, data);
   }
 
-  warn(message: string, context?: Record<string, any>): void {
-    this.log(LogLevel.WARN, message, context);
+  error(message: string, context?: string, data?: any): void {
+    this.log('error', message, context, data);
   }
 
-  error(message: string, error?: Error, context?: Record<string, any>): void {
-    this.log(LogLevel.ERROR, message, context, error);
-  }
-
-  // Create a child logger with additional context
-  child(context: Record<string, any>): Logger {
-    return new Logger(this.level, { ...this.context, ...context });
-  }
-
-  // Set the log level
-  setLevel(level: LogLevel): void {
-    this.level = level;
-  }
-
-  // Get current log level
-  getLevel(): LogLevel {
-    return this.level;
+  debug(message: string, context?: string, data?: any): void {
+    this.log('debug', message, context, data);
   }
 }
 
-// Create default logger instance
-export const logger = new Logger(
-  process.env.NODE_ENV === 'development' ? LogLevel.DEBUG : LogLevel.INFO,
-  { service: 'quotefast-dashboard' }
-);
-
-// Export the Logger class for custom instances
-export { Logger };
-
-// Convenience functions
-export const debug = (message: string, context?: Record<string, any>) => logger.debug(message, context);
-export const info = (message: string, context?: Record<string, any>) => logger.info(message, context);
-export const warn = (message: string, context?: Record<string, any>) => logger.warn(message, context);
-export const error = (message: string, error?: Error, context?: Record<string, any>) => logger.error(message, error, context);
+export const logger = new Logger();

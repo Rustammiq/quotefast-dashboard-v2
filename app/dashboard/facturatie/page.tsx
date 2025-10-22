@@ -3,11 +3,11 @@ import { useState, useEffect, lazy, Suspense } from 'react';
 import { useTheme } from "../../../contexts/ThemeContext";
 import DashboardCard from "../components/DashboardCard";
 import PageHeader from "../components/PageHeader";
-import { logger } from '../../../lib/logger';
+import { logger } from '../../../utils/helpers/logger';
 import { mockInvoices, getInvoicesStats } from "../../../lib/mockData/invoicesData";
 import { FileText, Euro, CheckCircle, Clock, AlertTriangle, Send } from 'lucide-react';
 import { useAuth } from '../../../app/providers';
-import { Invoice } from '../../../types/dashboard';
+import { Invoice } from '../../../types/ui/dashboard';
 
 // Lazy load heavy components
 const DataTable = lazy(() => import("../components/DataTable"));
@@ -154,7 +154,7 @@ export default function FacturatiePage() {
   };
 
   const handleBulkAction = (action: string, selectedRows: any[]) => {
-    logger.info(`Bulk action: ${action}`, 'facturatie', { selectedRows });
+    console.log(`Bulk action: ${action}`, { selectedRows });
     // Implement bulk actions
   };
 

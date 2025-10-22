@@ -1,8 +1,8 @@
 // app/api/gemini/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { geminiService } from '@/lib/gemini-service';
-import { logger } from '@/lib/logger';
+import { geminiService  } from '@/lib/ai';
+import { logger } from '@/utils/helpers/logger';
 
 export async function POST(request: NextRequest) {
   try {
@@ -125,7 +125,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    logger.error('Gemini API request failed', 'api/gemini', error);
+    logger.error('Gemini API request failed', 'api/gemini', error instanceof Error ? error : new Error(String(error)));
 
     return NextResponse.json(
       {
@@ -167,7 +167,7 @@ export async function GET() {
     });
 
   } catch (error) {
-    logger.error('Gemini status check failed', 'api/gemini', error);
+    logger.error('Gemini status check failed', 'api/gemini', error instanceof Error ? error : new Error(String(error)));
 
     return NextResponse.json(
       {

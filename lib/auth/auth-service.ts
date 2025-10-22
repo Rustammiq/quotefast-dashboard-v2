@@ -1,6 +1,6 @@
-import { createClient } from './supabase/client';
-import { logger } from './logger';
-import { User } from '../types/user';
+import { createClient } from '../supabase/client';
+import { logger } from '../../utils/helpers/logger';
+import { User } from '../../types/api/user';
 import { PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 
 const supabase = createClient() as SupabaseClient;

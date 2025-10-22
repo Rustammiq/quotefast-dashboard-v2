@@ -5,9 +5,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../../components
 import { Shield, Eye, EyeOff } from "lucide-react";
 import { useStandby } from "../../../../contexts/StandbyContext";
 import { useToast } from "../hooks/useToast";
-import { authService } from "../../../../lib/auth-service";
+import { authService } from "../../../../lib/auth";
 import { securitySchema, pinSchema, calculatePasswordStrength } from "../utils/validation";
-import { SecurityFormData, PinFormData } from "../../../../types/settings";
+import { SecurityFormData, PinFormData } from "../../../../types/forms/settings";
 import { INACTIVITY_TIMEOUT_OPTIONS } from "../utils/constants";
 
 export default function SecuritySection() {

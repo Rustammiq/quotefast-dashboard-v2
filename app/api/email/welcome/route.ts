@@ -2,7 +2,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { emailUtils } from '@/lib/email'
-import { logger } from '@/lib/logger'
+import { logger } from '@/utils/helpers/logger'
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,8 +17,8 @@ export async function POST(request: NextRequest) {
 
     const result = await emailUtils.sendWelcome({ email, name })
 
-    if ('error' in result) {
-      logger.error('Welcome email failed', 'email', result.error)
+    if (!result.success) {
+      logger.error('Welcome email failed', 'api/email/welcome', result.error)
       return NextResponse.json(
         { error: 'Failed to send welcome email' },
         { status: 500 }
@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     )
   } catch (error) {
-    console.error('Welcome email API error:', error)
+    logger.error('Welcome email API error', 'api/email/welcome', error instanceof Error ? error : new Error(String(error)))
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

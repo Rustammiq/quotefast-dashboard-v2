@@ -1,7 +1,7 @@
 // lib/gemini-service.ts
 
 import { GoogleGenerativeAI, GenerativeModel, ChatSession } from '@google/generative-ai';
-import { logger } from './logger';
+import { logger } from '../../utils/helpers/logger';
 
 export interface GeminiMessage {
   role: 'user' | 'model';

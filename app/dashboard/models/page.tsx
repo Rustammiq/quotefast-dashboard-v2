@@ -3,8 +3,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../components/ui
 import { Bot, Settings, Play, TestTube, Zap, Brain, Code, Shield, CheckCircle, AlertCircle, Clock } from "lucide-react";
 import { useState } from "react";
 import ModelConfigModal from "../components/ModelConfigModal";
-import { logger } from '../../../lib/logger';
-import { geminiService } from '../../../lib/gemini-service';
+import { logger } from '../../../utils/helpers/logger';
+import { geminiService } from '../../../lib/ai';
 
 interface Model {
   id: string;

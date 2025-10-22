@@ -1,4 +1,4 @@
-import { Customer } from '../../types/dashboard';
+import { Customer } from '../../types/ui/dashboard';
 
 export const mockCustomers: Customer[] = [
   {

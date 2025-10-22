@@ -1,6 +1,6 @@
 // lib/aiPersonalization.ts
 
-import { OnboardingData } from './onboarding'
+import { OnboardingData } from '../onboarding'
 
 export interface PersonalizedTemplate {
   id: string
@@ -155,7 +155,7 @@ export function getSuggestedWorkflows(onboardingData: OnboardingData): Suggested
       (onboardingData.workflowPreferences.automationLevel === 'minimaal' && 
        workflow.id === 'follow-up-reminder')
     
-    const usageMatch = onboardingData.usageGoals.some(goal => {
+    const usageMatch = onboardingData.usageGoals.some((goal: string) => {
       if (goal === 'offertes' && workflow.id === 'follow-up-reminder') return true
       if (goal === 'factureren' && workflow.id === 'auto-invoice') return true
       if (goal === 'projectmanagement' && workflow.id === 'project-status-updates') return true

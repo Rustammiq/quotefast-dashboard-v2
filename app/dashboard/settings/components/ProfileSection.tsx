@@ -29,7 +29,7 @@ import { User, Edit, Upload, Loader2, Calendar, Activity, Shield, Download, Tras
 import { useAuth } from "@/app/providers";
 import { useToast } from "../hooks/useToast";
 import { profileSchema } from "../utils/validation";
-import { ProfileFormData } from "../../../../types/settings";
+import { ProfileFormData } from "@/types/settings";
 
 interface ProfileSectionProps {
   /** Custom className for styling */
@@ -117,10 +117,10 @@ export default function ProfileSection({ className, onProfileUpdate }: ProfileSe
 
   // Optimized input change handler with error clearing
   const handleInputChange = useCallback((field: keyof ProfileFormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev: ProfileFormData) => ({ ...prev, [field]: value }));
     // Clear error for this field when user starts typing
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: undefined }));
+      setErrors((prev: Record<string, string | undefined>) => ({ ...prev, [field]: undefined }));
     }
   }, [errors]);
 

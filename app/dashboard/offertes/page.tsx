@@ -1,10 +1,10 @@
 "use client";
 import { useState, useEffect, lazy, Suspense, useMemo, useCallback } from 'react';
-import { useTheme } from "@/contexts/ThemeContext";
-import { getPersonalizedTemplates } from "@/lib/aiPersonalization";
+import { useTheme  } from '../../../contexts/ThemeContext';
+import { getPersonalizedTemplates  } from '../../../lib/ai';
 import DashboardCard from "../components/DashboardCard";
-import { logger } from '@/lib/logger';
-import { mockOffers, getOffersStats } from "@/lib/mockData/offersData";
+import { logger } from '../../../utils/helpers/logger';
+import { mockOffers, getOffersStats  } from '../../../lib/mockData/offersData';
 import { 
   FileText, Euro, Target, Clock, Users, Zap, Download, Filter, Search, 
   Plus, ChevronDown, ExternalLink, Loader2, BarChart3, TrendingUp 
@@ -315,96 +315,41 @@ export default function OffertesPage() {
 
   const totalPages = Math.ceil(offers.length / 10);
 
-  const columns: any[] = [
+  const columns = [
     {
-      id: 'select',
-      header: ({ table }: { table: any }) => (
-        <input
-          type="checkbox"
-          checked={selectedRows.length === offers.length}
-          onChange={(e) => {
-            if (e.target.checked) {
-              setSelectedRows(offers);
-            } else {
-              setSelectedRows([]);
-            }
-          }}
-          className="rounded border-gray-300 text-primary focus:ring-primary"
-          aria-label="Selecteer alle offertes"
-        />
-      ),
-      cell: ({ row }: { row: any }) => (
-        <input
-          type="checkbox"
-          checked={selectedRows.includes(row.original)}
-          onChange={(e) => {
-            if (e.target.checked) {
-              setSelectedRows([...selectedRows, row.original]);
-            } else {
-              setSelectedRows(selectedRows.filter(item => item !== row.original));
-            }
-          }}
-          className="rounded border-gray-300 text-primary focus:ring-primary"
-          aria-label={`Selecteer offerte ${row.original.title}`}
-        />
-      ),
-      enableSorting: false,
-      enableHiding: false,
+      key: 'id',
+      label: 'ID',
+      sortable: true,
+      width: '80px',
+      render: (value: any) => <span className="font-mono text-sm">#{value}</span>
     },
     {
-      accessorKey: 'id',
-      header: ({ column }: { column: any }) => (
-        <div className="flex items-center gap-1">
-          <span>ID</span>
-          <button
-            onClick={column.getToggleSortingHandler()}
-            className="p-1 hover:bg-accent rounded"
-            aria-label={`Sorteer op ID ${column.getIsSorted() === 'asc' ? 'oplopend' : column.getIsSorted() === 'desc' ? 'aflopend' : ''}`}
-          >
-            <ChevronDown className={`h-4 w-4 ${column.getIsSorted() === 'asc' ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-      ),
-      cell: ({ row }: { row: any }) => <span className="font-mono text-sm">#{row.original.id}</span>,
-    },
-    {
-      accessorKey: 'title',
-      header: 'Offerte',
-      cell: ({ row }: { row: any }) => (
+      key: 'title',
+      label: 'Offerte',
+      sortable: true,
+      render: (value: any, row: any) => (
         <div className="space-y-1">
-          <span className="font-medium line-clamp-1">{row.original.title}</span>
-          <span className="text-sm text-muted-foreground">{row.original.client}</span>
+          <span className="font-medium line-clamp-1">{value}</span>
+          <span className="text-sm text-muted-foreground">{row.client}</span>
         </div>
-      ),
+      )
     },
     {
-      accessorKey: 'amount',
-      header: ({ column }: { column: any }) => (
-        <div className="flex items-center gap-1">
-          <Euro className="h-4 w-4" />
-          <span>Bedrag</span>
-          <button
-            onClick={column.getToggleSortingHandler()}
-            className="p-1 hover:bg-accent rounded"
-            aria-label={`Sorteer op bedrag ${column.getIsSorted() === 'asc' ? 'oplopend' : column.getIsSorted() === 'desc' ? 'aflopend' : ''}`}
-          >
-            <ChevronDown className={`h-4 w-4 ${column.getIsSorted() === 'asc' ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-      ),
-      cell: ({ row }: { row: any }) => {
-        const amount = row.original.amount;
+      key: 'amount',
+      label: 'Bedrag',
+      sortable: true,
+      render: (value: any) => {
         return new Intl.NumberFormat('nl-NL', {
-        style: 'currency',
-        currency: 'EUR'
-        }).format(amount);
-      },
+          style: 'currency',
+          currency: 'EUR'
+        }).format(value);
+      }
     },
     {
-      accessorKey: 'status',
-      header: 'Status',
-      cell: ({ row }: { row: any }) => {
-        const status = row.original.status;
+      key: 'status',
+      label: 'Status',
+      sortable: true,
+      render: (value: any) => {
         const statusConfig = {
           draft: { label: 'Concept', color: 'gray' },
           sent: { label: 'Verzonden', color: 'blue' },
@@ -413,43 +358,34 @@ export default function OffertesPage() {
           rejected: { label: 'Afgewezen', color: 'orange' }
         };
         
-        const config = statusConfig[status as keyof typeof statusConfig] || statusConfig.draft;
+        const config = statusConfig[value as keyof typeof statusConfig] || statusConfig.draft;
         
         return (
           <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-${config.color}-100 text-${config.color}-800 dark:bg-${config.color}-900 dark:text-${config.color}-100`}>
             {config.label}
           </span>
         );
-      },
+      }
     },
     {
-      accessorKey: 'createdDate',
-      header: ({ column }: { column: any }) => (
-        <div className="flex items-center gap-1">
-          <span>Aangemaakt</span>
-          <button
-            onClick={column.getToggleSortingHandler()}
-            className="p-1 hover:bg-accent rounded"
-            aria-label={`Sorteer op aanmaakdatum ${column.getIsSorted() === 'asc' ? 'oplopend' : column.getIsSorted() === 'desc' ? 'aflopend' : ''}`}
-          >
-            <ChevronDown className={`h-4 w-4 ${column.getIsSorted() === 'asc' ? 'rotate-180' : ''}`} />
-          </button>
-        </div>
-      ),
-      cell: ({ row }: { row: any }) => {
-        const date = new Date(row.original.createdDate);
+      key: 'createdDate',
+      label: 'Aangemaakt',
+      sortable: true,
+      render: (value: any) => {
+        const date = new Date(value);
         return date.toLocaleDateString('nl-NL', {
           year: 'numeric',
           month: 'short',
           day: 'numeric'
         });
-      },
+      }
     },
     {
-      accessorKey: 'dueDate',
-      header: 'Vervaldatum',
-      cell: ({ row }: { row: any }) => {
-        const date = new Date(row.original.dueDate);
+      key: 'dueDate',
+      label: 'Vervaldatum',
+      sortable: true,
+      render: (value: any) => {
+        const date = new Date(value);
         const today = new Date();
         const isOverdue = date < today;
         
@@ -458,28 +394,8 @@ export default function OffertesPage() {
             {date.toLocaleDateString('nl-NL')}
           </span>
         );
-      },
-    },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: ({ row }: { row: any }) => (
-        <div className="flex items-center gap-2">
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              setSelectedOffer(row.original);
-              setIsModalOpen(true);
-            }}
-            className="p-1 text-primary hover:bg-primary/10 rounded transition-colors"
-            aria-label="Bekijk offerte details"
-          >
-            <ExternalLink className="h-4 w-4" />
-          </motion.button>
-        </div>
-      ),
-    },
+      }
+    }
   ];
 
   const handleSort = (key: string) => {

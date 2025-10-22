@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { useTheme } from '@/contexts/ThemeContext'
+import { useTheme  } from '../../../contexts/ThemeContext'
 import { Bell, Settings, User, LogOut, ChevronDown, Sun, Moon } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 import { logger } from '@/lib/logger'
@@ -161,7 +161,7 @@ export default function TopNav() {
                   className="flex items-center gap-2 p-2 text-white/70 hover:text-white rounded-lg transition-colors"
                   onClick={toggleUserMenu}
                   aria-label="Gebruikersmenu"
-                  aria-expanded={isUserMenuOpen ? "true" : "false"}
+                  aria-expanded={isUserMenuOpen}
                   aria-haspopup="menu"
                 >
                   <User className="h-5 w-5" />

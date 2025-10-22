@@ -1,8 +1,8 @@
 // app/api/glm/route.ts
 
 import { NextRequest, NextResponse } from 'next/server';
-import { glmService } from '@/lib/glm-service';
-import { logger } from '@/lib/logger';
+import { glmService  } from '../../../lib/ai';
+import { logger } from '../../../utils/helpers/logger';
 
 export async function POST(request: NextRequest) {
   try {
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
         );
     }
 
-    logger.info(`GLM ${action} request completed successfully`, 'api/glm', {
+    console.log(`GLM ${action} request completed successfully`, {
       action,
       language: params.language || 'unknown'
     });
@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    logger.error('GLM API request failed', 'api/glm', error);
+    console.error('GLM API request failed:', error);
     
     return NextResponse.json(
       { 
@@ -152,7 +152,7 @@ export async function GET() {
     });
 
   } catch (error) {
-    logger.error('GLM status check failed', 'api/glm', error);
+    console.error('GLM status check failed:', error);
     
     return NextResponse.json(
       { 

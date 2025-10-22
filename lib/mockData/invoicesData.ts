@@ -1,4 +1,4 @@
-import { Invoice } from '../../types/dashboard';
+import { Invoice } from '../../types/ui/dashboard';
 
 export const mockInvoices: Invoice[] = [
   {

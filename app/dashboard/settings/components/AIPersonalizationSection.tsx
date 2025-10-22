@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../../components
 import { Brain, Zap, Edit, Save } from "lucide-react";
 import { useAIPersonalization } from "../../../../contexts/AIPersonalizationContext";
 import { useSettingsForm } from "../hooks/useSettingsForm";
-import { AIPersonalizationSettings } from "../../../../types/settings";
+import { AIPersonalizationSettings } from "@/types/settings";
 
 export default function AIPersonalizationSection() {
   const { onboardingData } = useAIPersonalization();
@@ -25,7 +25,7 @@ export default function AIPersonalizationSection() {
   }, [aiSettings]);
 
   const handleToggle = (key: keyof AIPersonalizationSettings) => {
-    setLocalSettings(prev => {
+    setLocalSettings((prev: AIPersonalizationSettings) => {
       const newSettings = { ...prev, [key]: !prev[key] };
       setHasChanges(JSON.stringify(newSettings) !== JSON.stringify(aiSettings));
       return newSettings;
@@ -134,7 +134,7 @@ export default function AIPersonalizationSection() {
         <div>
           <h4 className="text-white font-medium mb-3">AI Features Voorkeuren</h4>
           <div className="space-y-3">
-            {onboardingData.aiFeatureInterests.map((feature, index) => (
+            {onboardingData.aiFeatureInterests?.map((feature: string, index: number) => (
               <div key={index} className="flex items-center gap-3 p-3 bg-white/5 rounded-lg">
                 <div className="w-2 h-2 bg-blue-400 rounded-full flex-shrink-0" />
                 <span className="text-gray-300">{feature}</span>
@@ -149,17 +149,17 @@ export default function AIPersonalizationSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="p-3 bg-white/5 rounded-lg">
               <span className="text-gray-400 text-sm">Automatisering Niveau:</span>
-              <div className="text-white font-medium">{onboardingData.workflowPreferences.automationLevel}</div>
+              <div className="text-white font-medium">{onboardingData.workflowPreferences?.automationLevel}</div>
             </div>
             <div className="p-3 bg-white/5 rounded-lg">
               <span className="text-gray-400 text-sm">Rapportage Frequentie:</span>
-              <div className="text-white font-medium">{onboardingData.workflowPreferences.reportingFrequency}</div>
+              <div className="text-white font-medium">{onboardingData.workflowPreferences?.reportingFrequency}</div>
             </div>
           </div>
           <div className="mt-3">
             <span className="text-gray-400 text-sm">Gewenste Integraties:</span>
             <div className="flex flex-wrap gap-2 mt-2">
-              {onboardingData.workflowPreferences.integrationNeeds.map((integration, index) => (
+              {onboardingData.workflowPreferences?.integrationNeeds?.map((integration: string, index: number) => (
                 <span key={index} className="px-3 py-1 bg-blue-600/20 text-blue-300 rounded-full text-xs">
                   {integration}
                 </span>

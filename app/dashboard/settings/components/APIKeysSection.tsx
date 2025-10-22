@@ -4,8 +4,8 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "../../../../components/ui/card";
 import { Key, Plus, Copy, Trash2, Eye, EyeOff } from "lucide-react";
 import { useToast } from "../hooks/useToast";
-import { settingsService } from "../../../../lib/settings-service";
-import { APIKey } from "../../../../types/settings";
+import { settingsService } from "../../../../lib/validation";
+import { APIKey } from "../../../../types/forms/settings";
 
 export default function APIKeysSection() {
   const toast = useToast();

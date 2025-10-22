@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { vi } from 'vitest';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-import { AuthProvider } from '@/contexts/AuthContext';
-import { StandbyProvider } from '@/contexts/StandbyContext';
+import { ThemeProvider  } from '../../contexts/ThemeContext';
+import { AuthProvider  } from '../../contexts/AuthContext';
+import { StandbyProvider  } from '../../contexts/StandbyContext';
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (

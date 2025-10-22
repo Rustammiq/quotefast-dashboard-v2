@@ -6,7 +6,7 @@ import { Palette, Save } from "lucide-react";
 import { useTheme } from "../../../../contexts/ThemeContext";
 import { useSettingsForm } from "../hooks/useSettingsForm";
 import { LANGUAGE_OPTIONS, TIMEZONE_OPTIONS, THEME_OPTIONS } from "../utils/constants";
-import { AppearanceSettings } from "../../../../types/settings";
+import { AppearanceSettings } from "@/types/settings";
 
 export default function AppearanceSection() {
   const { theme, setTheme } = useTheme();
@@ -35,7 +35,7 @@ export default function AppearanceSection() {
     } else {
       setTheme(newTheme);
     }
-    setLocalSettings(prev => {
+    setLocalSettings((prev: AppearanceSettings) => {
       const newSettings = { ...prev, theme: newTheme };
       setHasChanges(JSON.stringify(newSettings) !== JSON.stringify(appearanceSettings));
       return newSettings;
@@ -43,7 +43,7 @@ export default function AppearanceSection() {
   };
 
   const handleLanguageChange = (language: string) => {
-    setLocalSettings(prev => {
+    setLocalSettings((prev: AppearanceSettings) => {
       const newSettings = { ...prev, language };
       setHasChanges(JSON.stringify(newSettings) !== JSON.stringify(appearanceSettings));
       return newSettings;
@@ -51,7 +51,7 @@ export default function AppearanceSection() {
   };
 
   const handleTimezoneChange = (timezone: string) => {
-    setLocalSettings(prev => {
+    setLocalSettings((prev: AppearanceSettings) => {
       const newSettings = { ...prev, timezone };
       setHasChanges(JSON.stringify(newSettings) !== JSON.stringify(appearanceSettings));
       return newSettings;

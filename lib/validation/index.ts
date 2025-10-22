@@ -1,4 +1,4 @@
 // Validation Services
-export { default as errorHandler } from './error-handler';
-export { default as errorHandlerAlt } from './errorHandler';
-export { default as settingsService } from './settings-service';
+export * from './error-handler';
+export { errorHandler as errorHandlerAlt } from './errorHandler';
+export { settingsService } from './settings-service';

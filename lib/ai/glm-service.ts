@@ -1,6 +1,6 @@
 // lib/glm-service.ts
 
-import { logger } from './logger';
+import { logger } from '../../utils/helpers/logger';
 
 export interface GLMMessage {
   role: 'system' | 'user' | 'assistant';

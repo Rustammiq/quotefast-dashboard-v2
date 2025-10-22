@@ -1,4 +1,4 @@
 // AI Services
-export { default as geminiService } from './gemini-service';
-export { default as glmService } from './glm-service';
-export { default as aiPersonalization } from './aiPersonalization';
+export { geminiService } from './gemini-service';
+export { glmService } from './glm-service';
+export * from './aiPersonalization';

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../../../components
 import { Settings, Download, Trash2, LogOut, Activity } from "lucide-react";
 import { useAuth } from "../../../providers";
 import { useToast } from "../hooks/useToast";
-import { SystemStats, ActiveSession } from "../../../../types/settings";
+import { SystemStats, ActiveSession } from "@/types/settings";
 
 export default function SystemSection() {
   const { user, signOut } = useAuth();

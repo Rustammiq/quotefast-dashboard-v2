@@ -1,5 +1,5 @@
 // Analytics Services
-export { default as analytics } from './analytics';
-export { default as performanceMonitor } from './performance-monitor';
-export { default as performanceOptimizer } from './performance-optimizer';
-export { default as performance } from './performance';
+export * from './analytics';
+export * from './performance-monitor';
+export { debounce as debounceOptimizer, throttle as throttleOptimizer } from './performance-optimizer';
+export * from './performance';

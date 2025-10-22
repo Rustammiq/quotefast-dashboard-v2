@@ -4,10 +4,10 @@ import DashboardCard from "./components/DashboardCard";
 import { Zap, FileText, Users, Euro, TrendingUp, Target, BarChart3, Sparkles, AlertCircle, Loader2, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useCallback } from "react";
-import { useTheme } from "@/contexts/ThemeContext";
-import { customersApi, invoicesApi } from "@/lib/api-service";
-import { DashboardData } from "@/types/dashboard";
-import { logger } from "@/lib/logger";
+import { useTheme  } from '../../contexts/ThemeContext';
+import { customersApi, invoicesApi } from "../../lib/api-service";
+import { DashboardData  } from '../../types/ui/dashboard';
+import { logger } from "../../lib/logger";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "react-hot-toast";
 
@@ -167,7 +167,8 @@ export default function DashboardPage() {
     const interval = setInterval(fetchDashboardData, 30000);
     
     return () => clearInterval(interval);
-  }, [fetchDashboardData]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array to prevent infinite loop
 
   // Hero section met animaties
   const HeroSection = () => (

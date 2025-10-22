@@ -1,5 +1,5 @@
 import { createClient } from './supabase/client';
-import { Customer, Invoice, ApiResponse } from '../types/dashboard';
+import { Customer, Invoice, ApiResponse } from '../types/ui/dashboard';
 import { logger } from './logger';
 import { PostgrestError, SupabaseClient } from '@supabase/supabase-js';
 

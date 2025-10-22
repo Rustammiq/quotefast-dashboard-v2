@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useTheme } from '@/contexts/ThemeContext'
+import { useTheme  } from '../contexts/ThemeContext'
 import { Sun, Moon, Play, ArrowRight, CheckCircle, Shield, Users, Zap, Code, Rocket, Heart, Search, Bell, Settings, ArrowUp, ArrowDown, Folder, DollarSign, TrendingUp, Clock, FileText, Sparkles, Star } from 'lucide-react'
 import PublicFooter from '@/app/components/PublicFooter'
 import PricingSection from '@/app/components/PricingSection'
@@ -9,7 +9,7 @@ import GradientText from '@/components/ui/GradientText'
 import FloatingElements from '@/components/ui/FloatingElements'
 import ScrollProgress from '@/components/ui/ScrollProgress'
 import { motion } from 'framer-motion'
-import { Button } from '@/lib/Button'
+import { Button } from '@/components/ui/button'
 import { memo, useMemo } from 'react'
 
 // Memoized components for better performance
@@ -67,17 +67,42 @@ const DashboardCard = memo(({
   isLoading?: boolean;
 }) => {
   return (
-    <DashboardCard
-      title={title}
-      value={value}
-      growth={growth}
-      icon={icon}
-      progress={progress}
-      trend={trend}
-      delay={delay}
-      description={description}
-      isLoading={isLoading}
-    />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay }}
+      className="glass-card p-6 rounded-xl border-border hover:shadow-lg"
+    >
+      <div className="flex items-center justify-between mb-4">
+        <h3 className="text-sm font-medium text-foreground/80">{title}</h3>
+        <div className="w-8 h-8 glass-card rounded-lg flex items-center justify-center">
+          {icon}
+        </div>
+      </div>
+      <div className="text-3xl font-bold text-foreground mb-2">{value}</div>
+      {growth && (
+        <div className="flex items-center gap-2 mb-3">
+          <div className={`modern-glass-button px-2 py-1 text-xs ${trend === 'up' ? '' : 'bg-destructive/10 text-destructive'}`}>
+            {trend === 'up' ? <ArrowUp className="w-3 h-3" /> : <ArrowDown className="w-3 h-3" />}
+            {growth}
+          </div>
+        </div>
+      )}
+      {progress && (
+        <div className="w-full bg-muted rounded-full h-2 mb-2">
+          <motion.div
+            className="h-2 bg-primary-gradient rounded-full"
+            initial={{ width: 0 }}
+            animate={{ width: `${progress}%` }}
+            transition={{ duration: 1.5, delay }}
+          />
+        </div>
+      )}
+      <div className="flex justify-between text-xs text-muted-foreground">
+        <span>{progress}%</span>
+        <span>Last updated: Just now</span>
+      </div>
+    </motion.div>
   )
 })
 

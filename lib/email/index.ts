@@ -1,3 +1,3 @@
 // Email Services
-export { default as emailTemplates } from './email-templates';
-export { default as emailService } from './email';
+export * from './email-templates';
+export * from './email';

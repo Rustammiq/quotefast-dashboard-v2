@@ -1,6 +1,6 @@
 // types/user.ts
 
-import { OnboardingData } from '../lib/onboarding'
+import { OnboardingData } from '../../lib/onboarding'
 
 export interface User {
   id: string;

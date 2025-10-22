@@ -2,7 +2,7 @@
 /* eslint-disable no-console */
 /* Simplified email service voor QuoteFast */
 
-import { logger } from './logger';
+// Removed problematic logger import that was causing recursive import
 
 // Base email template component
 const EmailTemplate = ({ 

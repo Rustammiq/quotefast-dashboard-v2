@@ -2,7 +2,7 @@
  * Centralized error handling service for QuoteFast Dashboard
  */
 
-import { logger } from './logger'
+import { logger } from '../../utils/helpers/logger'
 
 export interface ErrorContext {
   component?: string

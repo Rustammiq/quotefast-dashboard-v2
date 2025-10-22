@@ -85,6 +85,11 @@ function DataTable({
       return column.render(value, row);
     }
     
+    // Check if column.key exists before using it
+    if (!column.key) {
+      return value;
+    }
+    
     // Special handling for common data types
     if (column.key.includes('status')) {
       return <StatusBadge status={value} size="sm" />;

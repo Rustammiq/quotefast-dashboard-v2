@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/client';
-import { NotificationSettings, AppearanceSettings, AIPersonalizationSettings } from '../types/settings';
+import { NotificationSettings, AppearanceSettings, AIPersonalizationSettings } from '../../types/settings';
 import { logger } from '@/lib/logger';
 
 const supabase = createClient();

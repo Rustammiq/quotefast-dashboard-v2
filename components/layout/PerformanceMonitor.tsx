@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 interface PerformanceMetrics {
   loadTime: number
@@ -12,6 +12,7 @@ interface PerformanceMetrics {
 export function PerformanceMonitor() {
   const [metrics, setMetrics] = useState<PerformanceMetrics | null>(null)
   const [isVisible, setIsVisible] = useState(false)
+  const animationFrameRef = useRef<number | null>(null)
 
   useEffect(() => {
     const measurePerformance = () => {
@@ -27,7 +28,7 @@ export function PerformanceMonitor() {
       const memory = (performance as any).memory
       const memoryUsage = memory ? memory.usedJSHeapSize / 1024 / 1024 : 0
 
-      // Simple FPS calculation
+      // Simple FPS calculation with proper cleanup
       let fps = 0
       let lastTime = performance.now()
       let frameCount = 0
@@ -39,18 +40,18 @@ export function PerformanceMonitor() {
           fps = Math.round((frameCount * 1000) / (currentTime - lastTime))
           frameCount = 0
           lastTime = currentTime
+          
+          setMetrics({
+            loadTime: Math.round(loadTime),
+            renderTime: Math.round(renderTime),
+            memoryUsage: Math.round(memoryUsage * 100) / 100,
+            fps
+          })
         }
-        requestAnimationFrame(calculateFPS)
+        animationFrameRef.current = requestAnimationFrame(calculateFPS)
       }
 
       calculateFPS()
-
-      setMetrics({
-        loadTime: Math.round(loadTime),
-        renderTime: Math.round(renderTime),
-        memoryUsage: Math.round(memoryUsage * 100) / 100,
-        fps
-      })
     }
 
     // Measure after page load
@@ -62,6 +63,9 @@ export function PerformanceMonitor() {
 
     return () => {
       window.removeEventListener('load', measurePerformance)
+      if (animationFrameRef.current) {
+        cancelAnimationFrame(animationFrameRef.current)
+      }
     }
   }, [])
 
