@@ -139,8 +139,8 @@ importers:
         version: 3.25.76
     devDependencies:
       '@next/bundle-analyzer':
-        specifier: ^14.2.5
-        version: 14.2.33
+        specifier: ^16.0.1
+        version: 16.0.1
       '@playwright/test':
         specifier: ^1.56.1
         version: 1.56.1
@@ -601,8 +601,8 @@ packages:
   '@napi-rs/wasm-runtime@0.2.12':
     resolution: {integrity: sha512-ZVWUcfwY4E/yPitQJl481FjFo3K22D6qF0DuFH6Y/nbnE11GY5uguDxZMGXPQ8WQ0128MXQD7TnfHyK4oWoIJQ==}
 
-  '@next/bundle-analyzer@14.2.33':
-    resolution: {integrity: sha512-pKrmt1oQXOICfbQKytSbWwxh3Txqd+NG5nLb24ginP4neYy9GW6wZ3STEAcCLVhXPIBAMs9IEefuMtPJF4z9FA==}
+  '@next/bundle-analyzer@16.0.1':
+    resolution: {integrity: sha512-ds2XBC7hred9g9T16DYXp4llImGf9gBSsfY5k3bklizOtHeo+53EXjKm3AliS/fMTjYfRrv8usdL2wVZa1GIkw==}
 
   '@next/env@14.2.5':
     resolution: {integrity: sha512-/zZGkrTOsraVfYjGP8uM0p6r0BDT6xWpkjdVbcz66PJVSpwXX3yNiRycxAuDfBKGWBrZBXRuK/YVlkNgxHGwmA==}
@@ -5129,7 +5129,7 @@ snapshots:
       '@tybys/wasm-util': 0.10.1
     optional: true
 
-  '@next/bundle-analyzer@14.2.33':
+  '@next/bundle-analyzer@16.0.1':
     dependencies:
       webpack-bundle-analyzer: 4.10.1
     transitivePeerDependencies:
